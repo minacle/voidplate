@@ -1,0 +1,8 @@
+name: Voidplate
+description: |
+  Wear your armor unseen — keep the stats, show your skin.
+version: ${version}
+main: moe.minacle.minecraft.plugins.voidplate.Plugin
+authors:
+  - Minacle
+api-version: "1.21"
