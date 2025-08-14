@@ -6,3 +6,4 @@ main: moe.minacle.minecraft.plugins.voidplate.Plugin
 authors:
   - Minacle
 api-version: "1.21"
+folia-supported: true

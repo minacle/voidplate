@@ -56,6 +56,12 @@ tasks {
     }
 }
 
+runPaper.folia.registerTask()
+
+tasks.named("runFolia") {
+    notCompatibleWithConfigurationCache("run-paper 2.3.1 accesses project during execution")
+}
+
 tasks.named<ShadowJar>("shadowJar") {
     isEnableRelocation = true
     relocationPrefix = "moe.minacle.minecraft.plugins.voidplate.shadowjar"
