@@ -36,6 +36,7 @@ public final class Plugin extends JavaPlugin implements Listener {
         final Equippable inputEquipmentEquippable;
         final ItemRarity inputEquipmentRarity;
         final ItemStack result;
+        Equippable.Builder resultEquippableBuilder;
         if (inputTemplate == null)
             return;
         if (inputTemplate.getType() == Material.POTION) {
@@ -61,8 +62,7 @@ public final class Plugin extends JavaPlugin implements Listener {
         if (inputEquipmentRarity != null && inputEquipmentRarity == ItemRarity.EPIC)
             return;
         result = inputEquipment.clone();
-        result.setData(
-            DataComponentTypes.EQUIPPABLE,
+        resultEquippableBuilder =
             Equippable
             .equippable(inputEquipmentEquippable.slot())
             .equipSound(inputEquipmentEquippable.equipSound())
@@ -71,12 +71,17 @@ public final class Plugin extends JavaPlugin implements Listener {
             .allowedEntities(inputEquipmentEquippable.allowedEntities())
             .dispensable(inputEquipmentEquippable.dispensable())
             .swappable(inputEquipmentEquippable.swappable())
-            .damageOnHurt(inputEquipmentEquippable.damageOnHurt())
-            .equipOnInteract(inputEquipmentEquippable.equipOnInteract())
-            .canBeSheared(inputEquipmentEquippable.canBeSheared())
-            .shearSound(inputEquipmentEquippable.shearSound())
-            .build()
-        );
+            .damageOnHurt(inputEquipmentEquippable.damageOnHurt());
+        try {
+            // 1.21.5
+            resultEquippableBuilder = resultEquippableBuilder.equipOnInteract(inputEquipmentEquippable.equipOnInteract());
+            // 1.21.6
+            resultEquippableBuilder = resultEquippableBuilder.canBeSheared(inputEquipmentEquippable.canBeSheared());
+            resultEquippableBuilder = resultEquippableBuilder.shearSound(inputEquipmentEquippable.shearSound());
+        }
+        catch (NoSuchMethodError e) {
+        }
+        result.setData(DataComponentTypes.EQUIPPABLE, resultEquippableBuilder.build());
         result.setData(DataComponentTypes.RARITY, ItemRarity.EPIC);
         event.setResult(result);
     }
