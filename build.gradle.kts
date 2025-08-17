@@ -51,16 +51,11 @@ tasks.processResources {
 
 tasks {
     runServer {
-    notCompatibleWithConfigurationCache("run-paper 2.3.1 accesses project during execution")
         minecraftVersion(libs.versions.minecraft.get())
     }
 }
 
 runPaper.folia.registerTask()
-
-tasks.named("runFolia") {
-    notCompatibleWithConfigurationCache("run-paper 2.3.1 accesses project during execution")
-}
 
 tasks.named<ShadowJar>("shadowJar") {
     isEnableRelocation = true
