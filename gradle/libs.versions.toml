@@ -2,10 +2,10 @@
 ## 참고: https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
-minecraft = "1.21.8"
+minecraft = "1.21.9"
 bstats = "3.1.0"
-shadow = "8.3.9"
-run-paper = "2.3.1"
+shadow = "9.2.2"
+run-paper = "3.0.0"
 
 [libraries]
 bstats-bukkit = { module = "org.bstats:bstats-bukkit", version.ref = "bstats" }
